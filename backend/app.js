@@ -9,18 +9,14 @@ const replyRoutes = require("./routes/reply_routes");
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://student-doubt-based-system-2moj.vercel.app"
-];
-
 app.use(cors({
-  origin: allowedOrigins,
+  origin: [
+    "http://localhost:5173",
+    "https://student-doubt-based-system-2moj.vercel.app"
+  ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
 }));
-
-app.options("*", cors());
 
 app.use(express.json());
 
