@@ -13,7 +13,7 @@ app.use(cors(
         {
         origin: [
         "http://localhost:5173",
-        "https://student-doubt-based-system.vercel.app"
+        "https://student-doubt-based-git-9b4885-balajimunagala07-8640s-projects.vercel.app"
     ],
     credentials: true
     }
