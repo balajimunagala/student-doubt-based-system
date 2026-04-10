@@ -15,21 +15,17 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (
-      !origin ||
-      allowedOrigins.includes(origin) ||
-      origin.endsWith(".vercel.app")
-    ) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS blocked"));
-    }
-  },
+  origin: [
+    "http://localhost:5173",
+    "https://student-doubt-based-system-2moj.vercel.app"
+  ],
   credentials: true
 }));
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("CORS update deployed");
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/users", userRoutes);
