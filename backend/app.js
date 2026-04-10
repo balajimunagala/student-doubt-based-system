@@ -9,15 +9,25 @@ const replyRoutes = require("./routes/reply_routes");
 
 const app = express();
 
-app.use(cors(
-        {
-        origin: [
-        "http://localhost:5173",
-        "https://student-doubt-based-git-9b4885-balajimunagala07-8640s-projects.vercel.app"
-    ],
-    credentials: true
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://student-doubt-based-system.vercel.app"
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (
+      !origin ||
+      allowedOrigins.includes(origin) ||
+      origin.endsWith(".vercel.app")
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS blocked"));
     }
-));
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
