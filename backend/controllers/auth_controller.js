@@ -33,15 +33,12 @@ const registerUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
-
-    console.log("LOGIN EMAIL:", email);
+    const email = req.body.email.trim();
+    const password = req.body.password.trim();
 
     const user = await User.findOne({ email });
 
-    console.log("USER FOUND:", user);
-
-    if (!user || user.password !== password) {
+    if (!user || user.password.trim() !== password) {
       return res.status(400).json({
         message: "Invalid email or password",
       });
@@ -52,7 +49,6 @@ const loginUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.error("LOGIN ERROR:", error);
     return res.status(500).json({
       message: error.message,
     });
