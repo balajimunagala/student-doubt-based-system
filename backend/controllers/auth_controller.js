@@ -35,13 +35,25 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    console.log("LOGIN EMAIL:", email);
+
+    const user = await User.findOne({ email });
+
+    console.log("USER FOUND:", user);
+
+    if (!user || user.password !== password) {
+      return res.status(400).json({
+        message: "Invalid email or password",
+      });
+    }
+
     return res.status(200).json({
-      message: "Login route working",
-      email,
-      password
+      message: "Login successful",
+      user,
     });
   } catch (error) {
-    res.status(500).json({
+    console.error("LOGIN ERROR:", error);
+    return res.status(500).json({
       message: error.message,
     });
   }
