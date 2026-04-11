@@ -23,7 +23,7 @@ function StudentDashboard() {
 
   const fetchStudentCourses = async () => {
     try {
-      const res = await api.get(`/users/student/${user._id}/courses`);
+      const res = await api.get(`/users/${user._id}/courses`);
       setCourses(res.data);
     } catch (error) {
       console.error(error);
