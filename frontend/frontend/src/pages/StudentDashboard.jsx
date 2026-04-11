@@ -45,7 +45,7 @@ function StudentDashboard() {
 
     try {
       const res = await api.get(`/users/course/${course._id}/teachers`);
-      setTeachers(res.data.teachers);
+      setTeachers(res.data);
     } catch (error) {
       console.error(error);
     }
